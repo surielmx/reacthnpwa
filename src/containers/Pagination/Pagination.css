@@ -1,0 +1,9 @@
+.Pagination {
+	text-align: center;
+	padding: 10px 5px;
+	margin: 0 auto;
+	display: table;
+}
+span {
+	padding: 0 10px;
+}
