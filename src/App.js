@@ -37,7 +37,7 @@ class App extends Component {
 						<Suspense fallback={renderLoader()}>
 							<Navigation />
 						</Suspense>
-						<div className="container">
+						<main className="container">
 							<Suspense fallback={<span>...</span>}>
 								<Switch>
 									<Route
@@ -66,7 +66,7 @@ class App extends Component {
 									/>
 								</Switch>
 							</Suspense>
-						</div>
+						</main>
 					</div>
 				</Router>
 				<Snackbar showStatus={this.state.showStatus} />

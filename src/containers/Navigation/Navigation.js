@@ -4,7 +4,7 @@ import './Navigation.css';
 
 const Navigation = () => {
 	return (
-		<div className="navigation">
+		<nav className="navigation">
 			<ul className="navigation-nav">
 				<li>
 					<a href="/" aria-label="Home">
@@ -57,7 +57,7 @@ const Navigation = () => {
 					</NavLink>
 				</li>
 			</ul>
-		</div>
+		</nav>
 	);
 };
 
