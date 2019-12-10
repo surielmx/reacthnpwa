@@ -2,6 +2,7 @@ import React, { Component, Fragment, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Skeleton from './components/Skeleton.js';
 import Snackbar from './components/Snackbar.js';
+import Progress from './components/Progress/Progress.js';
 
 const Navigation = lazy(() => import('./containers/Navigation/Navigation'));
 const StoryContainer = lazy(() => import('./containers/StoryContainer'));
@@ -33,19 +34,26 @@ class App extends Component {
 		return (
 			<Fragment>
 				<Router>
-					<div>
+					<Fragment>
 						<Suspense fallback={renderLoader()}>
 							<Navigation />
 						</Suspense>
 						<main className="container">
-							<Suspense fallback={<span>...</span>}>
+							<Suspense fallback={<Progress />}>
 								<Switch>
 									<Route
-										path="/:type/:page?"
+										path={[
+											'/news/:page?',
+											'/newest/:page?',
+											'/show/:page?',
+											'/ask/:page?',
+											'/job/:page?',
+										]}
 										render={({ match, history }) => (
 											<StoryContainer {...match} {...history} />
 										)}
 									/>
+
 									<Route
 										path="/item/:item"
 										render={({ match, history }) => (
@@ -53,7 +61,7 @@ class App extends Component {
 										)}
 									/>
 									<Route
-										path="/user/:user"
+										path="/user/:user?"
 										render={({ match, history }) => (
 											<UserContainer {...match} {...history} />
 										)}
@@ -67,7 +75,7 @@ class App extends Component {
 								</Switch>
 							</Suspense>
 						</main>
-					</div>
+					</Fragment>
 				</Router>
 				<Snackbar showStatus={this.state.showStatus} />
 			</Fragment>

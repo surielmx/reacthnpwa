@@ -14,14 +14,14 @@ export const getStoryPage = async (type, page) => {
 	return response;
 };
 
-export const getItem = async id => {
+export const getStoryItem = async id => {
 	const query = `${BASE_URL}${URL_VERSION}/item/${id}.json`;
 	const instance = await fetch(query, options);
 	const response = await instance.json();
 	return response;
 };
 
-export const getUser = async user => {
+export const getStoryUser = async user => {
 	const query = `${BASE_URL}${URL_VERSION}/user/${user}.json`;
 	const instance = await fetch(query, options);
 	const response = await instance.json();

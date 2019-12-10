@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import Pagination from './Pagination/Pagination';
 import StoryList from './StoryList';
 import { typeStories, getTotalPages } from '../constants/constants';
-import { validatePage, getStory } from '../Actions/Actions';
+import { validatePage } from '../util/validators';
+import { getStoryPage } from '../api/fetchApi';
 
 class StoryContainer extends Component {
 	state = {
@@ -14,19 +15,16 @@ class StoryContainer extends Component {
 		this.validateStoryType();
 	}
 	componentDidUpdate(prevProps) {
-		const { params } = this.props;
-		const { type, page } = params;
-		if (prevProps.params.page !== page || prevProps.params.type !== type) {
-			console.log(prevProps);
-			console.log(this.props);
-			console.log(prevProps !== this.props);
+		const { url } = this.props;
+		if (prevProps.url !== url) {
 			this.validateStoryType(true);
 		}
 	}
 	validateStoryType = isNewPage => {
-		const { params } = this.props;
-		const { type, page } = params;
-		const isValidStory = typeStories.find(story => story === type);
+		const { path, params } = this.props;
+		const { page } = params;
+		const [, typeStory] = path.match(/\/([a-z]*)\//, 'g');
+		const isValidStory = typeStories.find(story => story === typeStory);
 		const isValidPage = validatePage(page);
 		if (isNewPage) {
 			this.setState({
@@ -34,14 +32,14 @@ class StoryContainer extends Component {
 			});
 		}
 		if (Boolean(isValidStory) && isValidPage) {
-			this.setStory(type, page);
+			this.setStory(typeStory, page);
 			return;
 		}
 		this.setState({ isValidPage: Boolean(isValidStory) && isValidPage });
 	};
 	async setStory(story, page) {
 		const totalPages = getTotalPages[story];
-		const stories = await getStory(story, page);
+		const stories = await getStoryPage(story, page);
 		const storyData = {
 			story,
 			stories,

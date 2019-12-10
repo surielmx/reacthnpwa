@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Skeleton from '../../components/Skeleton';
 import './Pagination.css';
-import isValidObject from '../../util/validators';
+import { isValidObject } from '../../util/validators';
 
 const renderLoader = () => <Skeleton variant="text" height="25px" width="25%" center />;
 
@@ -18,11 +18,19 @@ const Pagination = storyData => {
 
 	return (
 		<Fragment>
-			<div className="Pagination">
-				{currentPage !== 1 && <Link to={`/${story}/${nextPage}`}>&lt; prev</Link>}
+			<div className="pagination">
+				{currentPage !== 1 && (
+					<Link to={`/${story}/${nextPage}`} className="pagination-action">
+						&lt; prev
+					</Link>
+				)}
 				<span>{`${currentPage}/${totalPages}`}</span>
 
-				{currentPage !== totalPages && <Link to={`/${story}/${prevPage}`}>next &gt;</Link>}
+				{currentPage !== totalPages && (
+					<Link to={`/${story}/${prevPage}`} className="pagination-action">
+						next &gt;
+					</Link>
+				)}
 			</div>
 		</Fragment>
 	);

@@ -1,8 +1,10 @@
-.Pagination {
+.pagination {
 	text-align: center;
-	padding: 10px 5px;
-	margin: 0 auto;
+	margin: 20px auto;
 	display: table;
+}
+.pagination-action {
+	padding: 15px;
 }
 span {
 	padding: 0 10px;

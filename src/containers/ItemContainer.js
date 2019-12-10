@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Comments from './Comments';
-// import Pagination from "./Pagination/Pagination";
-// import StoryList from "./StoryList";
-import { validateItem, getStoryItem } from '../Actions/Actions';
-// import { getStoryType, getItem } from '../services/Services';
+import { getStoryItem } from '../api/fetchApi';
+import { validateItem, isValidObject } from '../util/validators';
 
 class ItemContainer extends Component {
 	constructor(props) {
@@ -14,47 +12,33 @@ class ItemContainer extends Component {
 		};
 	}
 
-	componentWillMount() {
-		const { match } = this.props;
-		const { params } = match;
-		const { isValidItem } = this.state;
-
-		if (!isValidItem) {
-			return;
-		}
-		this.setState({
-			isValidItem: validateItem(params.item),
-		});
-	}
-
 	componentDidMount() {
-		const { match } = this.props;
-		const { params } = match;
-		const { isValidItem } = this.state;
+		const { params } = this.props;
+		const isValidItem = validateItem(params.item);
 
 		if (!isValidItem) {
 			return;
 		}
-		this.getItem(params.item);
+		this.getComments(params.item);
 	}
 
-	getItem(item) {
-		this.setState({
-			comments: {},
-		});
-		getStoryItem(item).then(comments => {
-			this.setState({ comments });
-		});
+	async getComments(item) {
+		const comments = await getStoryItem(item);
+		const validObject = isValidObject(comments);
+		if (!Boolean(validObject)) {
+			return {};
+		}
+		this.setState({ comments });
 	}
 
 	render() {
 		const { isValidItem, comments } = this.state;
 		return (
-			<React.Fragment>
+			<Fragment>
 				{(isValidItem && <Comments comments={comments} />) || (
 					<h1 style={{ margin: '15px' }}>Invalid ITem</h1>
 				)}
-			</React.Fragment>
+			</Fragment>
 		);
 	}
 }
