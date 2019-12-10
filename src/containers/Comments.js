@@ -43,7 +43,6 @@ const Comments = props => {
 				return <CommentList key={item.id} node={item} children={item.comments} />;
 			})) ||
 		[];
-	console.log(nodes);
 	return (
 		<Fragment>
 			{nodes.length !== 0 ? (
