@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { ThemeConsumer } from '../context/context';
 import Pagination from './Pagination/Pagination';
 import StoryList from './StoryList';
 import { typeStories, getTotalPages } from '../constants/constants';
@@ -52,16 +53,20 @@ class StoryContainer extends Component {
 	render() {
 		const { isValidPage, storyData } = this.state;
 		return (
-			<Fragment>
-				{!isValidPage && <h1 style={{ margin: '15px' }}>Invalid page</h1>}
-
-				{isValidPage && (
+			<ThemeConsumer>
+				{({ value }) => (
 					<Fragment>
-						<Pagination {...storyData} />
-						<StoryList {...storyData} />
+						{!isValidPage && <h1 style={{ margin: '15px' }}>Invalid page</h1>}
+
+						{isValidPage && (
+							<Fragment>
+								<Pagination {...storyData} />
+								<StoryList {...storyData} />
+							</Fragment>
+						)}
 					</Fragment>
 				)}
-			</Fragment>
+			</ThemeConsumer>
 		);
 	}
 }

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { ThemeConsumer } from '../../context/context';
 import Skeleton from '../../components/Skeleton';
-import './Pagination.css';
 import { isValidObject } from '../../util/validators';
 
 const renderLoader = () => <Skeleton variant="text" height="25px" width="25%" center />;
@@ -10,6 +10,20 @@ const Pagination = storyData => {
 	if (!isValidObject(storyData)) {
 		return renderLoader();
 	}
+	const paginationStyle = {
+		textAlign: 'center',
+		margin: '20px auto',
+		display: 'table',
+	};
+	const paginationLinkStyle = {
+		padding: '15px',
+		color: '#4da3bb',
+		fontWeight: 500,
+	};
+	const paginationSeparatorStyle = {
+		padding: '0 10px',
+	};
+
 	const { story, page, totalPages } = storyData;
 
 	let currentPage = parseInt(page, 10);
@@ -18,20 +32,26 @@ const Pagination = storyData => {
 
 	return (
 		<Fragment>
-			<div className="pagination">
-				{currentPage !== 1 && (
-					<Link to={`/${story}/${nextPage}`} className="pagination-action">
-						&lt; prev
-					</Link>
-				)}
-				<span>{`${currentPage}/${totalPages}`}</span>
+			<ThemeConsumer>
+				{({ theme }) => (
+					<div style={{ ...paginationStyle }}>
+						{currentPage !== 1 && (
+							<Link to={`/${story}/${nextPage}`} style={{ ...paginationLinkStyle }}>
+								&lt; prev
+							</Link>
+						)}
+						<span
+							style={{ ...paginationSeparatorStyle }}
+						>{`${currentPage}/${totalPages}`}</span>
 
-				{currentPage !== totalPages && (
-					<Link to={`/${story}/${prevPage}`} className="pagination-action">
-						next &gt;
-					</Link>
+						{currentPage !== totalPages && (
+							<Link to={`/${story}/${prevPage}`} style={{ ...paginationLinkStyle }}>
+								next &gt;
+							</Link>
+						)}
+					</div>
 				)}
-			</div>
+			</ThemeConsumer>
 		</Fragment>
 	);
 };

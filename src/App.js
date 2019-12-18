@@ -1,5 +1,6 @@
 import React, { Component, Fragment, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 import Skeleton from './components/Skeleton.js';
 import Snackbar from './components/Snackbar.js';
 import Progress from './components/Progress/Progress.js';
@@ -33,50 +34,46 @@ class App extends Component {
 	render() {
 		return (
 			<Fragment>
-				<Router>
-					<Fragment>
-						<Suspense fallback={renderLoader()}>
-							<Navigation />
-						</Suspense>
-						<main className="container">
-							<Suspense fallback={<Progress />}>
-								<Switch>
-									<Route
-										path={[
-											'/news/:page?',
-											'/newest/:page?',
-											'/show/:page?',
-											'/ask/:page?',
-											'/job/:page?',
-										]}
-										render={({ match, history }) => (
-											<StoryContainer {...match} {...history} />
-										)}
-									/>
+				<Suspense fallback={renderLoader()}>
+					<Navigation />
+				</Suspense>
+				<main className="container">
+					<Suspense fallback={<Progress />}>
+						<Switch>
+							<Route
+								path={[
+									'/news/:page?',
+									'/newest/:page?',
+									'/show/:page?',
+									'/ask/:page?',
+									'/jobs/:page?',
+								]}
+								render={({ match, history }) => (
+									<StoryContainer {...match} {...history} />
+								)}
+							/>
 
-									<Route
-										path="/item/:item"
-										render={({ match, history }) => (
-											<ItemContainer {...match} {...history} />
-										)}
-									/>
-									<Route
-										path="/user/:user?"
-										render={({ match, history }) => (
-											<UserContainer {...match} {...history} />
-										)}
-									/>
-									<Route
-										path="*"
-										render={() => {
-											return <Redirect to="/news/1" />;
-										}}
-									/>
-								</Switch>
-							</Suspense>
-						</main>
-					</Fragment>
-				</Router>
+							<Route
+								path="/item/:item"
+								render={({ match, history }) => (
+									<ItemContainer {...match} {...history} />
+								)}
+							/>
+							<Route
+								path="/user/:user?"
+								render={({ match, history }) => (
+									<UserContainer {...match} {...history} />
+								)}
+							/>
+							<Route
+								path="*"
+								render={() => {
+									return <Redirect to="/news/1" />;
+								}}
+							/>
+						</Switch>
+					</Suspense>
+				</main>
 				<Snackbar showStatus={this.state.showStatus} />
 			</Fragment>
 		);

@@ -3,6 +3,7 @@ body {
 	padding: 0;
 	height: 100%;
 	font-size: 16px;
+	color: #3c4043;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
 		Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 	-webkit-text-size-adjust: 100%;
@@ -20,7 +21,7 @@ body {
 .container {
 	max-width: 980px;
 	margin: 0 auto;
-	padding: 40px 0px;
+	padding: 106px 0px;
 }
 
 ul {
@@ -52,7 +53,7 @@ p {
 }
 .story_details {
 	color: #757575;
-	font-size: 0.75rem;
+	font-size: 0.875rem;
 }
 .story_number {
 	margin: 0 10px 0 0;
