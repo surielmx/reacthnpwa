@@ -1,9 +1,9 @@
 import React from 'react';
+import { ThemeConsumer } from '../context/context';
 
 const Skeleton = ({ height, width, center = false, variant = 'rect', className }) => {
 	const initStyle = {
 		display: 'block',
-		backgroundColor: 'rgba(0, 0, 0, 0.08)',
 	};
 	const variantText = variant === 'text' && {
 		marginTop: '0.8rem',
@@ -24,7 +24,16 @@ const Skeleton = ({ height, width, center = false, variant = 'rect', className }
 		...variantText,
 		...variantCircle,
 	};
-	return <div className={className} style={skeletonStyle}></div>;
+	return (
+		<ThemeConsumer>
+			{({ theme }) => (
+				<div
+					className={className}
+					style={{ ...skeletonStyle, backgroundColor: theme.skeleton }}
+				></div>
+			)}
+		</ThemeConsumer>
+	);
 };
 
 export default Skeleton;

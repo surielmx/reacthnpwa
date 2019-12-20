@@ -4,16 +4,18 @@ const theme = {
 	light: {
 		background: '#ffffff',
 		title: '#263238',
-		paragraph: '#828286',
+		paginationNumber: '#3c4043',
 		link: '#828286',
 		linkActive: '#3c4043',
+		skeleton: '#efefef',
 	},
 	dark: {
-		background: '#3c4043',
-		title: '#eeeeee',
-		paragraph: '#eeeeee',
-		link: '#eeeeee',
+		background: '#0d1219',
+		title: '#afafaf',
+		paginationNumber: '#eeeeee',
+		link: '#828286',
 		linkActive: '#61dafb',
+		skeleton: '#313131',
 	},
 };
 
@@ -25,15 +27,29 @@ class ThemeProvider extends Component {
 		theme: theme.light,
 		chacked: false,
 	};
-	toggleTheme = ({ checked }) => {
-		this.setState(prevState => {
-			return {
-				theme: checked ? theme.dark : theme.light,
-				checked: !prevState.checked,
-			};
-		});
+	componentDidMount = () => {
+		this.getThemeSelected();
 	};
-
+	setThemeSelected = checked => {
+		const theme = checked ? 'dark' : 'light';
+		localStorage.setItem('theme', theme);
+	};
+	getThemeSelected = () => {
+		const hasTheme = localStorage.getItem('theme');
+		if (hasTheme !== null) {
+			const checked = hasTheme === 'dark';
+			this.toggleTheme({ checked });
+		}
+	};
+	toggleTheme = ({ checked }) => {
+		const thisTheme = checked ? 'dark' : 'light';
+		this.setThemeSelected(checked);
+		this.setState({
+			theme: theme[thisTheme],
+			checked,
+		});
+		document.body.style.backgroundColor = theme[thisTheme].background;
+	};
 	render() {
 		const { theme, checked } = this.state;
 		return (

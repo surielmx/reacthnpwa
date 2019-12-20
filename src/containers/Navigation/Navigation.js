@@ -35,95 +35,79 @@ const Navigation = props => {
 
 	return (
 		<ThemeConsumer>
-			{({ theme }) =>
-				console.log(theme) || (
-					<header style={navigationStyle}>
-						<div
-							style={{
-								display: 'flex',
-								justifyContent: 'space-around',
-								alignItems: 'center',
-							}}
-						>
-							<h3 style={{ color: '#61dafb', margin: '16px 0' }}>Hacker news</h3>
-							<ToggleButton />
-						</div>
-						<nav>
-							<ul style={navigationNav}>
-								<li>
-									<a href="/" aria-label="Home" style={navigationLink}>
-										<img
-											height="30"
-											alt="react logo"
-											src="/img/react_logo.svg"
-										/>
-									</a>
-								</li>
-								<li>
-									<NavLink
-										to="/news/1"
-										style={navigationLink}
-										activeStyle={navigationLinkActive}
-										isActive={(match, location) =>
-											/news/.test(location.pathname)
-										}
-									>
-										News
-									</NavLink>
-								</li>
-								<li>
-									<NavLink
-										to="/newest/1"
-										style={navigationLink}
-										activeStyle={navigationLinkActive}
-										isActive={(match, location) =>
-											/newest/.test(location.pathname)
-										}
-									>
-										Newest
-									</NavLink>
-								</li>
-								<li>
-									<NavLink
-										to="/show/1"
-										style={navigationLink}
-										activeStyle={navigationLinkActive}
-										isActive={(match, location) =>
-											/show/.test(location.pathname)
-										}
-									>
-										Show
-									</NavLink>
-								</li>
-								<li>
-									<NavLink
-										to="/ask/1"
-										style={navigationLink}
-										activeStyle={navigationLinkActive}
-										isActive={(match, location) =>
-											/ask/.test(location.pathname)
-										}
-									>
-										Ask
-									</NavLink>
-								</li>
-								<li>
-									<NavLink
-										to="/jobs/1"
-										style={navigationLink}
-										activeStyle={navigationLinkActive}
-										isActive={(match, location) =>
-											/jobs/.test(location.pathname)
-										}
-									>
-										Jobs
-									</NavLink>
-								</li>
-							</ul>
-						</nav>
-					</header>
-				)
-			}
+			{({ theme }) => (
+				<header style={navigationStyle}>
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'space-around',
+							alignItems: 'center',
+						}}
+					>
+						<h3 style={{ color: '#61dafb', margin: '10px 0' }}>Hacker news</h3>
+						<ToggleButton />
+					</div>
+					<nav>
+						<ul style={navigationNav}>
+							<li>
+								<a href="/" aria-label="Home" style={navigationLink}>
+									<img height="30" alt="react logo" src="/img/react_logo.svg" />
+								</a>
+							</li>
+							<li>
+								<NavLink
+									to="/news/1"
+									style={navigationLink}
+									activeStyle={navigationLinkActive}
+									isActive={(match, location) => /news/.test(location.pathname)}
+								>
+									News
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/newest/1"
+									style={navigationLink}
+									activeStyle={navigationLinkActive}
+									isActive={(match, location) => /newest/.test(location.pathname)}
+								>
+									Newest
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/show/1"
+									style={navigationLink}
+									activeStyle={navigationLinkActive}
+									isActive={(match, location) => /show/.test(location.pathname)}
+								>
+									Show
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/ask/1"
+									style={navigationLink}
+									activeStyle={navigationLinkActive}
+									isActive={(match, location) => /ask/.test(location.pathname)}
+								>
+									Ask
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to="/jobs/1"
+									style={navigationLink}
+									activeStyle={navigationLinkActive}
+									isActive={(match, location) => /jobs/.test(location.pathname)}
+								>
+									Jobs
+								</NavLink>
+							</li>
+						</ul>
+					</nav>
+				</header>
+			)}
 		</ThemeConsumer>
 	);
 };

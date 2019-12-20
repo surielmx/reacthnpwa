@@ -3,9 +3,12 @@ import StoryListItem from './StoryListItem';
 
 const StoryList = storyData => {
 	const { stories = [], page } = storyData;
+	const storyContainer = {
+		padding: '0 15px',
+	};
 
 	return (
-		<ul className="story-container">
+		<ul style={storyContainer}>
 			<StoryListItem stories={stories} page={page} />
 		</ul>
 	);

@@ -41,7 +41,7 @@ const Pagination = storyData => {
 							</Link>
 						)}
 						<span
-							style={{ ...paginationSeparatorStyle }}
+							style={{ ...paginationSeparatorStyle, color: theme.paginationNumber }}
 						>{`${currentPage}/${totalPages}`}</span>
 
 						{currentPage !== totalPages && (
