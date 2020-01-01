@@ -8,9 +8,10 @@ function ToggleButton(props) {
 		<>
 			<ThemeConsumer>
 				{({ theme, checked = false, onChange }) => (
-					<label>
+					<label htmlFor="checkbox">
 						<span className={`${size} switch-wrapper`}>
 							<input
+								id="checkbox"
 								type="checkbox"
 								checked={checked}
 								disabled={disabled}
