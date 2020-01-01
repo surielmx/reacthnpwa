@@ -1,46 +1,51 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { ThemeConsumer } from '../context/context';
 import Comments from './Comments';
 import { getStoryItem } from '../api/fetchApi';
 import { validateItem, isValidObject } from '../util/validators';
 
-class ItemContainer extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isValidItem: true,
-			comments: {},
-		};
-	}
+function ItemContainer(props) {
+	const { params } = props;
+	const [isValidItem, setValidItem] = useState(true);
+	const [hasComments, setHasComments] = useState(true);
+	const [comments, setComments] = useState([]);
 
-	componentDidMount() {
-		const { params } = this.props;
+	useEffect(() => {
 		const isValidItem = validateItem(params.item);
-
 		if (!isValidItem) {
+			setValidItem(isValidItem);
+			setHasComments(isValidItem);
 			return;
 		}
-		this.getComments(params.item);
-	}
-
-	async getComments(item) {
-		const comments = await getStoryItem(item);
-		const validObject = isValidObject(comments);
-		if (!Boolean(validObject)) {
-			return {};
+		async function getComments(item) {
+			const hasComments = await getStoryItem(item);
+			const { comments = [] } = hasComments;
+			setValidItem(isValidObject(hasComments));
+			setHasComments(comments.length !== 0);
+			setComments(comments);
 		}
-		this.setState({ comments });
-	}
+		getComments(params.item);
+	}, [params.item]);
 
-	render() {
-		const { isValidItem, comments } = this.state;
-		return (
-			<Fragment>
-				{(isValidItem && <Comments comments={comments} />) || (
-					<h1 style={{ margin: '15px' }}>Invalid ITem</h1>
-				)}
-			</Fragment>
-		);
-	}
+	return (
+		<ThemeConsumer>
+			{({ theme }) => (
+				<Fragment>
+					{isValidItem && hasComments && (
+						<div style={{ margin: '15px 0' }}>
+							<Comments comments={comments} theme={theme} />
+						</div>
+					)}
+					{!isValidItem && (
+						<h1 style={{ margin: '15px', color: theme.title }}>Invalid comment</h1>
+					)}
+					{isValidItem && !hasComments && (
+						<h1 style={{ margin: '15px', color: theme.title }}>No comments</h1>
+					)}
+				</Fragment>
+			)}
+		</ThemeConsumer>
+	);
 }
 
 export default ItemContainer;

@@ -1,62 +1,67 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { ThemeConsumer } from '../context/context';
 import Skeleton from '../components/Skeleton';
 import { isValidObject } from '../util/validators';
 import { getStoryUser } from '../api/fetchApi';
 
-class UserContainer extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			user: null,
-		};
-	}
+function UserContainer(props) {
+	const { params } = props;
+	const [isValidUser, setValidUser] = useState(false);
+	const [existUser, setExistUser] = useState(false);
+	const [user, setUser] = useState({});
 
-	componentDidMount() {
-		const {
-			params: { user },
-		} = this.props;
-		this.setUser(user);
-	}
-
-	async setUser(userId) {
-		const user = await getStoryUser(userId);
-		const existUser = isValidObject(user);
-
-		if (!Boolean(existUser)) {
-			return {};
+	useEffect(() => {
+		async function getUser(userId) {
+			const user = await getStoryUser(userId);
+			if (!user) {
+				setValidUser(Boolean(user));
+				setExistUser(Boolean(user));
+				setUser(Boolean(user));
+				return;
+			}
+			const existUser = isValidObject(user);
+			setValidUser(existUser);
+			setExistUser(existUser);
+			setUser(user);
 		}
-		this.setState({ user });
-	}
-
-	render() {
-		const { user } = this.state;
-
-		return (
-			<ThemeConsumer>
-				{({ theme }) =>
-					(user && (
-						<Fragment>
+		getUser(params.user);
+	}, [params.user]);
+	return (
+		<ThemeConsumer>
+			{({ theme }) => (
+				<Fragment>
+					{(!isValidUser && !existUser && !user) ||
+						(isValidUser && existUser && !!user && (
+							<Fragment>
+								<div style={{ margin: '30px 15px' }}>
+									<p style={{ color: theme.title }}>
+										<span>
+											<strong>${user && user.id}</strong>
+											{` joined ${user && user.created}`}
+										</span>
+									</p>
+									<p style={{ color: theme.title }}>{user && user.about}</p>
+								</div>
+							</Fragment>
+						)) || (
 							<div style={{ margin: '30px 15px' }}>
-								<p style={{ color: theme.title }}>
-									<span>
-										<strong>${user.id}</strong>
-										{` joined ${user.created}`}
-									</span>
-								</p>
-								<p>{user.about}</p>
+								<Skeleton
+									variant="text"
+									className="story"
+									height="10px"
+									width="45%"
+								/>
+								<Skeleton variant="text" className="story" />
 							</div>
-						</Fragment>
-					)) || (
-						<div style={{ margin: '30px 15px' }}>
-							<Skeleton variant="text" className="story" height="10px" width="45%" />
-							<Skeleton variant="text" className="story" />
-						</div>
-					)
-				}
-			</ThemeConsumer>
-		);
-	}
+						)}
+
+					{!isValidUser && !existUser && !user && (
+						<h1 style={{ margin: '15px', color: theme.title }}>Invalid user</h1>
+					)}
+				</Fragment>
+			)}
+		</ThemeConsumer>
+	);
 }
 
 export default UserContainer;
