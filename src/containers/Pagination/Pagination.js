@@ -17,7 +17,6 @@ const Pagination = storyData => {
 	};
 	const paginationLinkStyle = {
 		padding: '15px',
-		color: '#4da3bb',
 		fontWeight: 500,
 	};
 	const paginationSeparatorStyle = {
@@ -36,7 +35,10 @@ const Pagination = storyData => {
 				{({ theme }) => (
 					<div style={{ ...paginationStyle }}>
 						{currentPage !== 1 && (
-							<Link to={`/${story}/${nextPage}`} style={{ ...paginationLinkStyle }}>
+							<Link
+								to={`/${story}/${nextPage}`}
+								style={{ ...paginationLinkStyle, color: theme.paginationLink }}
+							>
 								&lt; prev
 							</Link>
 						)}
@@ -45,7 +47,10 @@ const Pagination = storyData => {
 						>{`${currentPage}/${totalPages}`}</span>
 
 						{currentPage !== totalPages && (
-							<Link to={`/${story}/${prevPage}`} style={{ ...paginationLinkStyle }}>
+							<Link
+								to={`/${story}/${prevPage}`}
+								style={{ ...paginationLinkStyle, color: theme.paginationLink }}
+							>
 								next &gt;
 							</Link>
 						)}

@@ -4,6 +4,8 @@ label {
 .switch-wrapper > input[type='checkbox'] {
 	opacity: 0;
 	position: absolute;
+	width: 18px;
+	height: 18px;
 }
 
 .switch-wrapper > input[type='checkbox'] + .switch {

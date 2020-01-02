@@ -8,10 +8,12 @@ function ToggleButton(props) {
 		<>
 			<ThemeConsumer>
 				{({ theme, checked = false, onChange }) => (
-					<label htmlFor="checkbox">
+					<label htmlFor="toggleTheme">
 						<span className={`${size} switch-wrapper`}>
 							<input
-								id="checkbox"
+								aria-label="toggleTheme"
+								id="toggleTheme"
+								name="toggleTheme"
 								type="checkbox"
 								checked={checked}
 								disabled={disabled}
