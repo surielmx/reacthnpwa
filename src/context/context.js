@@ -21,13 +21,13 @@ const theme = {
 	},
 };
 
-const ThemeContext = React.createContext();
+const ThemeContext = React.createContext({});
 const ThemeConsumer = ThemeContext.Consumer;
 
 class ThemeProvider extends Component {
 	state = {
 		theme: theme.light,
-		chacked: false,
+		checked: false,
 	};
 	componentDidMount = () => {
 		this.getThemeSelected();

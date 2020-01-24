@@ -3,12 +3,14 @@
 	"version": "2.3.3",
 	"private": true,
 	"dependencies": {
+		"prop-types": "^15.7.2",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
 		"react-router-dom": "^5.1.2",
 		"react-scripts": "^3.3.0"
 	},
 	"scripts": {
+		"jest": "jest",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
@@ -30,6 +32,6 @@
 		]
 	},
 	"devDependencies": {
-		"neslint-plugin-react-hooks": "^2.3.0"
+		"eslint-plugin-react-hooks": "^2.3.0"
 	}
 }

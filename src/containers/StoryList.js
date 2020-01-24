@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { ThemeConsumer } from '../context/context';
 import Skeleton from '../components/Skeleton';
 
-const StoryList = ({ stories = [], page }) => {
+const StoryList = ({ stories = [], page = 1 }) => {
 	const storyStyle = {
 		marginBottom: '20px',
 		display: 'flex',
@@ -123,4 +124,9 @@ const StoryList = ({ stories = [], page }) => {
 		</ThemeConsumer>
 	);
 };
+StoryList.propTypes = {
+	stories: PropTypes.array,
+	page: PropTypes.number,
+};
+
 export default StoryList;

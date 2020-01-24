@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Pagination from './Pagination/Pagination';
 import StoryList from './StoryList';
 import { typeStories, getTotalPages } from '../constants/constants';
@@ -9,7 +10,7 @@ function StoryContainer(props) {
 	const [isValidPage, setValidPage] = useState(true);
 	const [storyData, setStoryData] = useState({});
 
-	async function setStory(story, page) {
+	async function setStory(story = '', page = 1) {
 		const totalPages = getTotalPages[story];
 		const stories = await getStoryPage(story, page);
 		const storyData = {
@@ -50,5 +51,8 @@ function StoryContainer(props) {
 		</Fragment>
 	);
 }
+StoryContainer.propTypes = {
+	props: PropTypes.object,
+};
 
 export default StoryContainer;

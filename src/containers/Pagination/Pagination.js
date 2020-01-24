@@ -1,12 +1,14 @@
+// @ts-nocheck
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { ThemeConsumer } from '../../context/context';
 import Skeleton from '../../components/Skeleton';
 import { isValidObject } from '../../util/validators';
 
 const renderLoader = () => <Skeleton variant="text" height="25px" width="25%" center />;
 
-const Pagination = storyData => {
+const Pagination = (storyData = {}) => {
 	if (!isValidObject(storyData)) {
 		return renderLoader();
 	}
@@ -59,6 +61,13 @@ const Pagination = storyData => {
 			</ThemeConsumer>
 		</Fragment>
 	);
+};
+Pagination.propTypes = {
+	storyData: PropTypes.shape({
+		story: PropTypes.string,
+		page: PropTypes.string,
+		totalPages: PropTypes.number,
+	}),
 };
 
 export default Pagination;

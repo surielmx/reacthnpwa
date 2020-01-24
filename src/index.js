@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from './context/context';
 import App from './App';
 import './index.css';
@@ -8,9 +8,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
 	<ThemeProvider>
-		<Router>
-			<App />
-		</Router>
+		<App />
 	</ThemeProvider>,
 	document.getElementById('root')
 );

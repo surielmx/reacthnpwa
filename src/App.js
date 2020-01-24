@@ -1,5 +1,6 @@
+// @ts-nocheck
 import React, { Component, Fragment, Suspense, lazy } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Skeleton from './components/Skeleton.js';
 import Snackbar from './components/Snackbar.js';
@@ -26,6 +27,7 @@ class App extends Component {
 	}
 	handleStatusNavigation = e => {
 		e.preventDefault();
+
 		this.setState(prevState => {
 			return { showStatus: !prevState.showStatus };
 		});
@@ -39,7 +41,7 @@ class App extends Component {
 				</Suspense>
 				<main className="container">
 					<Suspense fallback={<Progress />}>
-						<Switch>
+						<Router>
 							<Route
 								path={[
 									'/news/:page?',
@@ -71,7 +73,7 @@ class App extends Component {
 									return <Redirect to="/news/1" />;
 								}}
 							/>
-						</Switch>
+						</Router>
 					</Suspense>
 				</main>
 				<Snackbar showStatus={this.state.showStatus} />

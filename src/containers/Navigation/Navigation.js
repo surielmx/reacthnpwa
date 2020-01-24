@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import ToggleButton from '../../components/ToggleButton/ToggleButton';

@@ -1,13 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ThemeConsumer } from '../../context/context';
 import './ToggleButton.css';
 
-function ToggleButton(props) {
-	const { text, size = 'default', disabled } = props;
+function ToggleButton({ text = '', size = 'default' }) {
 	return (
 		<>
 			<ThemeConsumer>
-				{({ theme, checked = false, onChange }) => (
+				{({ checked, onChange }) => (
 					<label htmlFor="toggleTheme">
 						<span className={`${size} switch-wrapper`}>
 							<input
@@ -16,7 +16,6 @@ function ToggleButton(props) {
 								name="toggleTheme"
 								type="checkbox"
 								checked={checked}
-								disabled={disabled}
 								onChange={e => onChange(e.target)}
 							/>
 							<span className="switch">
@@ -30,5 +29,9 @@ function ToggleButton(props) {
 		</>
 	);
 }
+ToggleButton.propTypes = {
+	text: PropTypes.string,
+	size: PropTypes.string,
+};
 
 export default ToggleButton;

@@ -1,10 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { ThemeConsumer } from '../context/context';
 import Comments from './Comments';
 import { getStoryItem } from '../api/fetchApi';
 import { validateItem, isValidObject } from '../util/validators';
 
-function ItemContainer(props) {
+function ItemContainer(props = {}) {
 	const { params } = props;
 	const [isValidItem, setValidItem] = useState(true);
 	const [hasComments, setHasComments] = useState(true);
@@ -17,7 +18,7 @@ function ItemContainer(props) {
 			setHasComments(isValidItem);
 			return;
 		}
-		async function getComments(item) {
+		async function getComments(item = 0) {
 			const hasComments = await getStoryItem(item);
 			const { comments = [] } = hasComments;
 			setValidItem(isValidObject(hasComments));
@@ -47,5 +48,8 @@ function ItemContainer(props) {
 		</ThemeConsumer>
 	);
 }
+ItemContainer.propTypes = {
+	props: PropTypes.object,
+};
 
 export default ItemContainer;
