@@ -1,32 +1,32 @@
+// @ts-nocheck
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeConsumer } from '../../context/context';
 import './ToggleButton.css';
 
-function ToggleButton({ text = '', size = 'default' }) {
+function ToggleButton() {
 	return (
-		<>
-			<ThemeConsumer>
-				{({ checked, onChange }) => (
-					<label htmlFor="toggleTheme">
-						<span className={`${size} switch-wrapper`}>
-							<input
-								aria-label="toggleTheme"
-								id="toggleTheme"
-								name="toggleTheme"
-								type="checkbox"
-								checked={checked}
-								onChange={e => onChange(e.target)}
-							/>
-							<span className="switch">
-								<span className="switch-handle" />
-							</span>
+		<ThemeConsumer>
+			{({ checked, onChange }) => (
+				<label htmlFor="toggle-theme">
+					<span className="switch-wrapper">
+						<input
+							role="switch"
+							aria-label="toggle-theme"
+							aria-checked={checked}
+							id="toggle-theme"
+							name="toggleTheme"
+							type="checkbox"
+							checked={checked}
+							onChange={e => onChange(e.target)}
+						/>
+						<span className="switch">
+							<span className="switch-handle" />
 						</span>
-						<span className="switch-label">{text}</span>
-					</label>
-				)}
-			</ThemeConsumer>
-		</>
+					</span>
+				</label>
+			)}
+		</ThemeConsumer>
 	);
 }
 ToggleButton.propTypes = {

@@ -4,6 +4,12 @@ import ReactDOM from 'react-dom';
 import { ThemeConsumer } from '../../context/context';
 
 const Progress = () => {
+	let progressRoot = document.getElementById('progress-root');
+	if (!progressRoot) {
+		progressRoot = document.createElement('div');
+		progressRoot.setAttribute('id', 'progress-root');
+		document.body.appendChild(progressRoot);
+	}
 	const gooeyStyle = {
 		position: 'absolute',
 		top: '50%',
@@ -36,26 +42,25 @@ const Progress = () => {
 		marginLeft: '16px',
 		borderRadius: '50%',
 	};
-	const renderProgress = () => {
-		return (
-			<ThemeConsumer>
-				{({ theme }) => (
-					<Fragment>
-						{/* <!Credit: https://dribbble.com/shots/5092176-Newton-Loader> */}
-						<div style={gooeyStyle}>
-							<span style={{ ...gooeyDot, background: theme.title }}></span>
-							<div style={gooeyDots}>
-								<span style={{ ...gooeySpan, background: theme.title }}></span>
-								<span style={{ ...gooeySpan, background: theme.title }}></span>
-								<span style={{ ...gooeySpan, background: theme.title }}></span>
-							</div>
+
+	return ReactDOM.createPortal(
+		<ThemeConsumer>
+			{({ theme = {} }) => (
+				<Fragment>
+					{/* <!Credit: https://dribbble.com/shots/5092176-Newton-Loader> */}
+					<div style={gooeyStyle}>
+						<span style={{ ...gooeyDot, background: theme.title }}></span>
+						<div style={gooeyDots}>
+							<span style={{ ...gooeySpan, background: theme.title }}></span>
+							<span style={{ ...gooeySpan, background: theme.title }}></span>
+							<span style={{ ...gooeySpan, background: theme.title }}></span>
 						</div>
-					</Fragment>
-				)}
-			</ThemeConsumer>
-		);
-	};
-	return ReactDOM.createPortal(renderProgress(), document.getElementById('progress-root'));
+					</div>
+				</Fragment>
+			)}
+		</ThemeConsumer>,
+		progressRoot
+	);
 };
 
 export default Progress;
