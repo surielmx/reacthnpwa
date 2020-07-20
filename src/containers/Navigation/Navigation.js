@@ -45,7 +45,7 @@ const Navigation = () => {
 				<h3 style={{ color: '#61dafb', margin: '10px 0' }}>Hacker news</h3>
 				<ToggleButton />
 			</div>
-			<nav aria-label="Topics">
+			<nav>
 				<ul style={navigationNav}>
 					<li>
 						<a href="/" aria-label="Home" style={navigationLink}>
@@ -54,6 +54,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
+							id="news-link"
 							to="/news/1"
 							style={navigationLink}
 							activeStyle={navigationLinkActive}
@@ -64,6 +65,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
+							id="newest-link"
 							to="/newest/1"
 							style={navigationLink}
 							activeStyle={navigationLinkActive}
@@ -74,6 +76,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
+							id="show-link"
 							to="/show/1"
 							style={navigationLink}
 							activeStyle={navigationLinkActive}
@@ -84,6 +87,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
+							id="ask-link"
 							to="/ask/1"
 							style={navigationLink}
 							activeStyle={navigationLinkActive}
@@ -94,6 +98,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
+							id="jobs-link"
 							to="/jobs/1"
 							style={navigationLink}
 							activeStyle={navigationLinkActive}
