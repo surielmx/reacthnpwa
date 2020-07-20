@@ -36,7 +36,6 @@ const Skeleton = ({
 		<ThemeConsumer>
 			{({ theme = {} }) => (
 				<div
-					data-testid="skeleton"
 					className={className}
 					style={{ ...skeletonStyle, backgroundColor: theme.skeleton }}
 				></div>
