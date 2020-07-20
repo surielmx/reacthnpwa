@@ -1,17 +1,19 @@
+// @ts-nocheck
 import React, { Fragment, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { ThemeConsumer } from '../context/context';
 import Skeleton from '../components/Skeleton';
 import { isValidObject } from '../util/validators';
 import { getStoryUser } from '../api/fetchApi';
 
-function UserContainer(props) {
+function UserContainer(props = {}) {
 	const { params } = props;
 	const [isValidUser, setValidUser] = useState(false);
 	const [existUser, setExistUser] = useState(false);
 	const [user, setUser] = useState({});
 
 	useEffect(() => {
-		async function getUser(userId) {
+		async function getUser(userId = 0) {
 			const user = await getStoryUser(userId);
 			if (!user) {
 				setValidUser(Boolean(user));
@@ -63,5 +65,8 @@ function UserContainer(props) {
 		</ThemeConsumer>
 	);
 }
+UserContainer.propTypes = {
+	props: PropTypes.object,
+};
 
 export default UserContainer;

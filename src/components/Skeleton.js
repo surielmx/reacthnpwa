@@ -1,7 +1,15 @@
+// @ts-nocheck
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ThemeConsumer } from '../context/context';
 
-const Skeleton = ({ height, width, center = false, variant = 'rect', className }) => {
+const Skeleton = ({
+	height = '38px',
+	width = 'inherit',
+	center = false,
+	variant = 'rect',
+	className = null,
+}) => {
 	const initStyle = {
 		display: 'block',
 	};
@@ -26,14 +34,23 @@ const Skeleton = ({ height, width, center = false, variant = 'rect', className }
 	};
 	return (
 		<ThemeConsumer>
-			{({ theme }) => (
+			{({ theme = {} }) => (
 				<div
+					data-testid="skeleton"
 					className={className}
 					style={{ ...skeletonStyle, backgroundColor: theme.skeleton }}
 				></div>
 			)}
 		</ThemeConsumer>
 	);
+};
+
+Skeleton.propTypes = {
+	height: PropTypes.string,
+	width: PropTypes.string,
+	center: PropTypes.bool,
+	variant: PropTypes.string,
+	className: PropTypes.string,
 };
 
 export default Skeleton;

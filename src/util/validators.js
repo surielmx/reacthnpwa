@@ -1,4 +1,4 @@
-export const isValidObject = obj => {
+export const isValidObject = (obj = {}) => {
 	return (
 		obj &&
 		typeof obj === 'object' &&
@@ -7,7 +7,7 @@ export const isValidObject = obj => {
 	);
 };
 
-export const validatePage = (page, total) => {
+export const validatePage = (page = 1, total = 0) => {
 	let validPage = !isNaN(page);
 
 	if (validPage && total) {
@@ -16,8 +16,8 @@ export const validatePage = (page, total) => {
 	return validPage;
 };
 
-export const validateItem = item => {
-	let isValidItem = !isNaN(item);
-	let validItem = isValidItem && +item.length === 8;
+export const validateItem = (item = '') => {
+	let isValidItem = !isNaN(Number(item));
+	let validItem = isValidItem && item.length === 8;
 	return validItem;
 };

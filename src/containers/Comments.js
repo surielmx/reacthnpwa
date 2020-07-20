@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Skeleton from '../components/Skeleton';
 
-function CommentList(props) {
-	const { node, children, theme = {} } = props;
-
+function CommentList({ node, children, theme = {} }) {
 	const nodes =
 		children.length !== 0 &&
 		children.map(childnode => {
@@ -80,4 +79,9 @@ const Comments = ({ comments, theme }) => {
 		</div>
 	);
 };
+Comments.propTypes = {
+	comments: PropTypes.array,
+	theme: PropTypes.object,
+};
+
 export default Comments;

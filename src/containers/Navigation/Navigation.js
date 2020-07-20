@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import ToggleButton from '../../components/ToggleButton/ToggleButton';
@@ -44,7 +45,7 @@ const Navigation = () => {
 				<h3 style={{ color: '#61dafb', margin: '10px 0' }}>Hacker news</h3>
 				<ToggleButton />
 			</div>
-			<nav>
+			<nav aria-label="Topics">
 				<ul style={navigationNav}>
 					<li>
 						<a href="/" aria-label="Home" style={navigationLink}>
