@@ -1,13 +1,106 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+	--title: #2D3848;
+	--content: #666c75;
+	--header: #ffffff;
+	--body:#ffffff;
+	--bg:#ffffff;
+	--link: #3854b2;
+	--skeleton: #eaeaea;
+}
+.dark{
+	--title: #ffffff;
+	--content: #ffffff;
+	--header: #1A202C;
+	--body:#3A4556;
+	--bg:#2d3747;
+	--link: #74befa;
+	--skeleton: #1d2939;
 }
 
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-size: 16px;
+	background: var(--body);
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+		Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	-webkit-text-size-adjust: 100%;
+	-moz-osx-font-smoothing: grayscale !important;
+	-webkit-font-smoothing: antialiased !important;
+}
+*,
+*::after,
+*::before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+	width: 15px;
+}
+*::-webkit-scrollbar-thumb {
+	background: -webkit-gradient(linear, left top, left bottom, from(var(--skeleton)), to(var(--skeleton)));
+	background: linear-gradient(to bottom, var(--title), var(--title));
+	border-radius: 30px;
+	box-shadow: inset 3px 3px 3px var(--title), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+*::-webkit-scrollbar-track {
+	background: linear-gradient(to right, var(--body), var(--body) 0.0625rem, var(--skeleton) 0.0625rem, var(--skeleton));
+}
+.container {
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 102px 0px 0px;
+}
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	white-space: initial;
+}
+a {
+	color: var(--link);
+}
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+p {
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+.snackbar {
+	z-index: 20;
+	position: fixed;
+	display: flex;
+	left: 16px;
+	right: 16px;
+	bottom: 16px;
+	background-color: #1A202C;
+	border-radius: 4px;
+	min-width: 288px;
+	padding: 1rem;
+}
+.snackbat-img {
+	margin-right: 1rem;
+}
+.snackbar-content {
+	color: #fff;
+	border-radius: 4px;
+	margin: 0;
+}
+@keyframes dot {
+	50% {
+		transform: translateX(96px);
+	}
+}
+@keyframes dots {
+	50% {
+		transform: translateX(-31px);
+	}
+}
+@media screen and (min-width: 768px) {
+	.snackbar {
+		flex-grow: initial;
+		left: initial;
+	}
 }

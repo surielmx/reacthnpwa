@@ -1,0 +1,5 @@
+{
+	"projectId": "2dbha3",
+	"baseUrl": "http://localhost:3000/",
+	"include": ["./node_modules/cypress", "cypress/**/*.js"]
+}
