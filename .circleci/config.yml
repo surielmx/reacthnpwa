@@ -1,5 +1,3 @@
-environment: 
-  CYPRESS_RECORD_KEY: 17b5dc8d-e63d-4640-8ab9-ec38c81d1d1e
 orbs: 
   cypress: cypress-io/cypress@1
 version: 2.1
