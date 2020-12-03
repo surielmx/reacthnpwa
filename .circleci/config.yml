@@ -23,12 +23,24 @@ jobs:
       - image: cimg/base:2020.01
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - 'v1-dependencies-{{ checksum "package.json" }}'
+            - v1-dependencies-
       - run:
+          name: Installing dependencies
+          command: 'npm install'
+      - save_cache:
+          paths:
+            - node_modules
+          key: 'v1-dependencies-{{ checksum "package.json" }}'
+      - run: 
+          name: App in the background
+          command: 'npm start'
+          background: true
+      - run: 
+          name: Wait for localhost to load
+          command: 'yarn wait-on http://localhost:3000'
+          - run:
           name: "Runing tests"
-          command: ./node_modules/.bin/cypress run --record
+          command: ''./node_modules/.bin/cypress run --record'
