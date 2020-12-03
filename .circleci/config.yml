@@ -22,6 +22,13 @@ jobs:
     docker:
       - image: cimg/base:2020.01
     steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
       - run:
           name: "Runing tests"
-          command: npx cypress:run
+          command: $(npm bin)/cypress run --record
