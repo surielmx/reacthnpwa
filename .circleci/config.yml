@@ -5,15 +5,10 @@ workflows:
   build: 
     jobs: 
       - 
-        cypress/run: ~
-    steps: 
-      env: 
-        CYPRESS_RECORD_KEY: e63a7946-58c1-48bf-9a6b-c0c832a5g137
-        post-steps: 
-          - 
-            store_test_results: 
-              path: cypress/results
-        record: true
-      with: 
-        record: true
-        start: "npm run start"
+        cypress/run: 
+          post-steps: 
+            - 
+              store_test_results: 
+                path: cypress/results
+          record: false
+          start: "npm start"
