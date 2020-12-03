@@ -1,4 +1,6 @@
 version: 2.1
+orbs: 
+  cypress: cypress-io/cypress@1
 
 workflows:
   my-workflow:
@@ -9,7 +11,7 @@ workflows:
 jobs:
   run-tests:
     docker:
-      - image: cimg/base:2020.01
+      - image: 'cypress/base:12'
     steps:
       - checkout
       - restore_cache:
@@ -18,7 +20,7 @@ jobs:
             - v1-dependencies-
       - run:
           name: Installing dependencies
-          command: 'npm ci'
+          command: 'npm install'
       - save_cache:
           paths:
             - ~/.npm
