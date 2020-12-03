@@ -4,16 +4,4 @@ version: 2.1
 workflows: 
   build: 
     jobs: 
-      - 
-        cypress/install: 
-          build: "npm run build"
-      - 
-        cypress/run: 
-          post-steps: 
-            - 
-              store_test_results: 
-                path: cypress/results
-          record: true
-          requires: 
-            - cypress/install
-          start: "npm start"
+      - cypress/run
