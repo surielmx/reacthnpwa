@@ -18,7 +18,7 @@ jobs:
             - v1-dependencies-
       - run:
           name: Installing dependencies
-          command: npm ci
+          command: 'npm ci'
       - save_cache:
           paths:
             - ~/.npm
@@ -33,4 +33,4 @@ jobs:
           command: 'npm wait-on http://localhost:3000'
       - run:
           name: "Runing tests"
-          command: $(npm bin)/cypress run --record --key $CYPRESS_RECORD_KEY
+          command: npx cypress run --record --key $CYPRESS_RECORD_KEY
