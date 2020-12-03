@@ -3,16 +3,25 @@ version: 2.1
 workflows:
   my-workflow:
     jobs:
+      - check-env:
+          context:
+            - cypress
       - run-tests:
           context:
             - cypress
-
 jobs:
-  run-tests:
+  check-env:
     docker:
       - image: cimg/base:2020.01
     steps:
       - checkout
       - run:
-          name: "echo environment variables from org-global context"
+          name: "Check cypress key"
           command: echo $CYPRESS_RECORD_KEY
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - run:
+          name: "Runing tests"
+          command: npx cypress:run
