@@ -41,7 +41,9 @@ function UserContainer(props = {}) {
 									{` joined ${user && user.created}`}
 								</span>
 							</p>
-							<p style={{ color: 'var(--content)' }}>{user && user.about}</p>
+							<p style={{ color: 'var(--content)', wordBreak: 'break-all' }}>
+								{user && user.about}
+							</p>
 						</div>
 					</Fragment>
 				)) || (
