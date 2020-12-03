@@ -1,17 +1,18 @@
 version: 2.1
 
 workflows:
-  test-env-vars:
+  my-workflow:
     jobs:
-      - build
+      - run-tests:
+          context:
+            - cypress
 
 jobs:
-  build:
+  run-tests:
     docker:
       - image: cimg/base:2020.01
     steps:
       - checkout
-      - run: 
-          name: "echo an env var that is part of our project"
-          command: |
-            echo $CYPRESS_RECORD_KEY
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $CYPRESS_RECORD_KEY
