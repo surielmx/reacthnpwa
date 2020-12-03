@@ -1,14 +1,20 @@
+version: 2.1
 orbs: 
   cypress: cypress-io/cypress@1
-version: 2.1
+
 workflows: 
   test: 
-    jobs: 
-      - 
-        cypress/run: 
-          post-steps: 
-            - 
-              store_test_results: 
-                path: cypress/results
+    - 
+      build: ~
+      context: my_context_name
+
+jobs: 
+  - 
+    cypress/run: 
+      post-steps: 
+        - 
           record: false
           start: "npm start"
+          store_test_results: 
+            path: cypress/results
+

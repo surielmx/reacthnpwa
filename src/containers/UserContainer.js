@@ -27,6 +27,10 @@ function UserContainer(props = {}) {
 		}
 		getUser(params.user);
 	}, [params.user]);
+
+	function userMarkup() {
+		return { __html: user.about };
+	}
 	return (
 		<Fragment>
 			{(!isValidUser && !existUser && !user) ||
@@ -41,9 +45,12 @@ function UserContainer(props = {}) {
 									{` joined ${user && user.created}`}
 								</span>
 							</p>
-							<p style={{ color: 'var(--content)', wordBreak: 'break-all' }}>
-								{user && user.about}
-							</p>
+							{user ? (
+								<p
+									style={{ color: 'var(--content)', wordBreak: 'break-all' }}
+									dangerouslySetInnerHTML={userMarkup()}
+								/>
+							) : null}
 						</div>
 					</Fragment>
 				)) || (
@@ -54,7 +61,7 @@ function UserContainer(props = {}) {
 				)}
 
 			{!isValidUser && !existUser && !user && (
-				<h1 style={{ margin: '15px' }}>Invalid user</h1>
+				<h1 style={{ color: 'var(--content)', margin: '15px' }}>Invalid user</h1>
 			)}
 		</Fragment>
 	);
