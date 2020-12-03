@@ -31,4 +31,4 @@ jobs:
           - v1-dependencies-
       - run:
           name: "Runing tests"
-          command: $(npm bin)/cypress run --record
+          command: ./node_modules/.bin/cypress run --record
