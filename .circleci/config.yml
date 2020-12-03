@@ -30,9 +30,6 @@ jobs:
           name: App in the background
           command: 'npm start'
           background: true
-      - run: 
-          name: Wait for localhost to load
-          command: 'npm wait-on http://localhost:3000'
       - run:
           name: "Runing tests"
           command: npx cypress run --record --key $CYPRESS_RECORD_KEY
