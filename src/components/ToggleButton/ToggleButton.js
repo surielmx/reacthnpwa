@@ -11,12 +11,10 @@ function ToggleButton({ themeMode }) {
 		setWhichMode(theme);
 		localStorage.setItem('theme', theme);
 		if (theme === 'dark') {
-			document.body.classList.remove('light');
 			document.body.classList.add('dark');
 			return;
 		}
 		document.body.classList.remove('dark');
-		document.body.classList.add('light');
 	};
 
 	return (

@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "./node_modules/.bin/cypress run --record --key $CYPRESS_REORD_KEY"
   },
   "eslintConfig": {
     "extends": [

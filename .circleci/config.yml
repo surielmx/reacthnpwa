@@ -1,17 +1,35 @@
 version: 2.1
-orbs:
-    node: circleci/node@1.1.6
-jobs:
-    build-and-test:
-        executor:
-            name: node/default
-        steps:
-            - checkout
-            - node/with-cache:
-                  steps:
-                      - run: npm install
-                      - run: npm test
+orbs: 
+  cypress: cypress-io/cypress@1
+
 workflows:
-    build-and-test:
-        jobs:
-            - build-and-test
+  my-workflow:
+    jobs:
+      - run-tests:
+          context:
+            - cypress
+jobs:
+  run-tests:
+    docker:
+      - image: 'cypress/base:12'
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - 'v1-dependencies-{{ checksum "package.json" }}'
+            - v1-dependencies-
+      - run:
+          name: Installing dependencies
+          command: 'npm install'
+      - save_cache:
+          paths:
+            - ~/.npm
+            - ~/.cache
+          key: 'v1-dependencies-{{ checksum "package.json" }}'
+      - run: 
+          name: App in the background
+          command: 'npm start'
+          background: true
+      - run:
+          name: "Runing tests"
+          command: npx cypress run --record --key $CYPRESS_RECORD_KEY
