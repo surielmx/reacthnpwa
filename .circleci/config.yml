@@ -1,14 +1,17 @@
-orbs: 
-  cypress: cypress-io/cypress@1
 version: 2.1
-workflows: 
-  test: 
-    jobs: 
-      - 
-        cypress/run: 
-          post-steps: 
-            - 
-              store_test_results: 
-                path: cypress/results
-          record: false
-          start: "npm start"
+
+workflows:
+  test-env-vars:
+    jobs:
+      - build
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run: 
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $CYPRESS_RECORD_KEY
