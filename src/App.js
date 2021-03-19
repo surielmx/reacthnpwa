@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { Fragment, Suspense, lazy } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Skeleton from './components/Skeleton';
 import Progress from './components/Progress/Progress';
@@ -80,6 +81,7 @@ function App() {
 					</Switch>
 				</Suspense>
 			</main>
+			<ToastContainer />
 			<Snackbar showStatus={isOffLine} />
 		</Fragment>
 	);
