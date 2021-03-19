@@ -1,18 +1,18 @@
-:root{
-	--title: #2D3848;
+:root {
+	--title: #2d3848;
 	--content: #666c75;
 	--header: #ffffff;
-	--body:#ffffff;
-	--bg:#ffffff;
+	--body: #ffffff;
+	--bg: #ffffff;
 	--link: #3854b2;
 	--skeleton: #eaeaea;
 }
-.dark{
+.dark {
 	--title: #ffffff;
 	--content: #ffffff;
-	--header: #1A202C;
-	--body:#3A4556;
-	--bg:#2d3747;
+	--header: #1a202c;
+	--body: #3a4556;
+	--bg: #2d3747;
 	--link: #74befa;
 	--skeleton: #1d2939;
 }
@@ -40,13 +40,25 @@ body {
 	width: 15px;
 }
 *::-webkit-scrollbar-thumb {
-	background: -webkit-gradient(linear, left top, left bottom, from(var(--skeleton)), to(var(--skeleton)));
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(var(--skeleton)),
+		to(var(--skeleton))
+	);
 	background: linear-gradient(to bottom, var(--title), var(--title));
 	border-radius: 30px;
 	box-shadow: inset 3px 3px 3px var(--title), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
 *::-webkit-scrollbar-track {
-	background: linear-gradient(to right, var(--body), var(--body) 0.0625rem, var(--skeleton) 0.0625rem, var(--skeleton));
+	background: linear-gradient(
+		to right,
+		var(--body),
+		var(--body) 0.0625rem,
+		var(--skeleton) 0.0625rem,
+		var(--skeleton)
+	);
 }
 .container {
 	max-width: 980px;
@@ -75,7 +87,7 @@ p {
 	left: 16px;
 	right: 16px;
 	bottom: 16px;
-	background-color: #1A202C;
+	background-color: #1a202c;
 	border-radius: 4px;
 	min-width: 288px;
 	padding: 1rem;
@@ -87,6 +99,9 @@ p {
 	color: #fff;
 	border-radius: 4px;
 	margin: 0;
+}
+.Toastify__toast--dark {
+	background: #323337;
 }
 @keyframes dot {
 	50% {

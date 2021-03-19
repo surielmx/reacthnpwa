@@ -31,5 +31,5 @@ jobs:
           command: 'npm start'
           background: true
       - run:
-          name: "Runing tests"
+          name: "Running tests"
           command: npx cypress run --record --key $CYPRESS_RECORD_KEY
