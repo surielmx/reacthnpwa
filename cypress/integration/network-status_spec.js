@@ -73,7 +73,7 @@ describe('Network status', function () {
 		assertOffline();
 	});
 
-	it('LIGTH - Offline mode ans show snackbar', function () {
+	it('LIGHT - Offline mode ans show snackbar', function () {
 		visit(false);
 		goOffline();
 		assertOffline();
